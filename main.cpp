@@ -45,7 +45,7 @@ int main(int argc, const char* argv[])
 	while (1)
 	{
 		getCurrFrame(term, player);
-
+        
 		while (term.hasEvents())
 		{
 			GEvent e = term.getEvent();
