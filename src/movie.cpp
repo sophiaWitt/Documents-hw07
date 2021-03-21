@@ -118,17 +118,18 @@ void MoviePlayer::loadTape()
         while (!fileInput.eof()) {
             // first line is the seperator
             std::string seperator;
-            
             std::getline(fileInput, seperator);
-            
+            int sep = std::stoi(seperator);
             // 13 lines afterwards is the image
             std::string image;
             for (int i = 0; i < FRAMESIZE; i++) {
                 std::getline(fileInput, image);
             }
             
-            // add the image to the list
-            mFilm.push_back(image);
+            // add the image to the list as many times as the seperator says
+            for (int j = 0; j < sep; j++) {
+                mFilm.push_back(image);
+            }
         }
     }
     else {
