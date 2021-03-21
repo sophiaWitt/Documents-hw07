@@ -1,10 +1,10 @@
 # ITP 365 HW07 - Spring 2021 #
 
 ## Student information... ##
-Name: Tommy Trojan
+Name: Sophia Wittmeier
 
-Email: ttrojan@usc.edu
+Email: wittmeie@usc.edu
 
-Platform: [PC/MAC]
+Platform: MAC
 
 ### Notes ###
