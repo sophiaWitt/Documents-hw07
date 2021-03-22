@@ -1,13 +1,16 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 #include "movie.h"
 
-// Function: Parameterized Constructor
-// Purpose: Sets member variables to input, clears list, and calls loader
-// Input: None
-// Returns: Nothing
+// ITP 365 Spring 2021
+// HW07 – Movie Player
+// Name: Sophia Wittmeier
+// Email: wittmeie@usc.edu
+// Platform: Mac
+
 MoviePlayer::MoviePlayer(std::string filmName)
 {
     // set the appropriate member variables
@@ -32,7 +35,8 @@ void MoviePlayer::goFwrd()
 {
     // should not go past the end of the movie
     if (currFrameNum == mFilm.size()) {
-        rewind();
+        //rewind();
+        std::cout << "End of film. Cannot go forward." << std::endl;
     }
     else {
         // move the tape forward by 1
@@ -65,10 +69,7 @@ void MoviePlayer::rewind()
 
 std::string MoviePlayer::getCurrFrame()
 {
-	// TODO: Fix return value
-    
-    
-	return *(new std::string);
+	return *pos;
 }
 
 void MoviePlayer::delCurrFrame()
@@ -108,7 +109,6 @@ unsigned int MoviePlayer::getFrameSize() const
 
 void MoviePlayer::loadTape()
 {
-    //  TODO: QUESTION: what do I do with the seperator? should I add that to the list too?
     // open the file
     std::ifstream fileInput(mFilmName);
     
@@ -119,17 +119,29 @@ void MoviePlayer::loadTape()
             // first line is the seperator
             std::string seperator;
             std::getline(fileInput, seperator);
-            int sep = std::stoi(seperator);
+            
+            // converting the seperator to an int
+            int sep;
+            std::stringstream ss;
+            ss << seperator;
+            ss >> sep;
+           
             // 13 lines afterwards is the image
-            std::string image;
+            std::stringstream sss;
+            
+            std::string lin;
             for (int i = 0; i < FRAMESIZE; i++) {
-                std::getline(fileInput, image);
+                std::getline(fileInput, lin);
+                sss << lin << "\n";
             }
+            std::string image;
+            image = sss.str();
             
             // add the image to the list as many times as the seperator says
             for (int j = 0; j < sep; j++) {
                 mFilm.push_back(image);
             }
+            
         }
     }
     else {

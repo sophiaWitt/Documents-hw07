@@ -7,6 +7,12 @@
 #include "ITPDoubleList.hpp"
 #include "movie.h"
 
+// ITP 365 Spring 2021
+// HW07 – Movie Player
+// Name: Sophia Wittmeier
+// Email: wittmeie@usc.edu
+// Platform: Mac
+
 // Helper function declarations (don't change this)
 extern bool CheckTextFilesSame(const std::string& fileNameA,
 	const std::string& fileNameB);

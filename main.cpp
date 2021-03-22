@@ -16,7 +16,7 @@ void getCurrFrame(GTerminal& term, MoviePlayer& mp)
 	std::string currFrame = mp.getCurrFrame();
 	std::string line = "";
 	std::stringstream ss(currFrame);
-
+    
 	for (unsigned i = 0; i < mp.getFrameSize(); i++)
 	{
 		std::getline(ss, line);
