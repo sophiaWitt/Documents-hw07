@@ -19,16 +19,25 @@ extern bool CheckTextFilesSame(const std::string& fileNameA,
 
 TEST_CASE("Student list tests", "[student]")
 {
+    
+    
 	SECTION("Default constructor, size, and destructor")
 	{
-
+        MoviePlayer mp = MoviePlayer("input/scene1.ani");
+        
+        
+        
+        
 		// Leave this at the end
 		REQUIRE(ITPMemLeaks::CheckIfMemoryFreed());
 	}
 
 	SECTION("Push_front, front, back")
 	{
-		
+//        MoviePlayer mp;
+//        mp.push_front("---");
+//        mp.front();
+//        mp.back();
 		// Leave this at the end
 		REQUIRE(ITPMemLeaks::CheckIfMemoryFreed());
 	}
