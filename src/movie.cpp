@@ -99,7 +99,7 @@ unsigned MoviePlayer::getCurrFrameNum() const
 
 unsigned int MoviePlayer::getNumFrames() const
 {
-	return mFilm.size();
+	return (mFilm.size() - 1);
 }
 
 unsigned int MoviePlayer::getFrameSize() const
