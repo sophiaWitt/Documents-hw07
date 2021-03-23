@@ -37,6 +37,14 @@ void MoviePlayer::goFwrd()
     if (currFrameNum == mFilm.size()) {
         //rewind();
         std::cout << "End of film. Cannot go forward." << std::endl;
+        //TODO: QUESTIONS FOR TA
+        // what should I do instead of this.
+        // what can I signal to end the film 
+        // i think the issue is that when it does go forward and it hits the end of the film it prints "End of film.Cannot go forward" over and over again until i stop the film.
+        // what should i do instead?
+        // maybe this is the case for all the github things? am i just handling errors wrong?
+        // should I throw an exception instead?
+        
     }
     else {
         // move the tape forward by 1
@@ -74,12 +82,24 @@ std::string MoviePlayer::getCurrFrame()
 
 void MoviePlayer::delCurrFrame()
 {
-    // delete current frame
-    mFilm.erase(pos);
-    // move the tape forward by one
-    // this function already updates the currPositionNum, keeping track of how many frames have been viewed
-    // if the current frame is the end, it will rewind the film
-    goFwrd();
+    // cannot delete frame if there are no frames
+    if (getNumFrames() != 1) {
+        // delete current frame
+        mFilm.erase(pos);
+        // move the tape forward by one
+        // this function already updates the currPositionNum, keeping track of how many frames have been viewed
+        // if the current frame is the end, it will rewind the film
+        if (currFrameNum == mFilm.size()) {
+            goBack();
+        }
+        else if (currFrameNum < mFilm.size()){
+            goFwrd();
+        }
+        
+    }
+    else {
+        std::cout << "Cannot delete the frame or else there will not be any left." << std::endl;
+    }
 }
 
 void MoviePlayer::copyCurrFrame()
@@ -92,9 +112,10 @@ void MoviePlayer::copyCurrFrame()
     mFilm.insert(pos, copy);
 }
 
+//TODO: QUESTION: is this wrong? 
 unsigned MoviePlayer::getCurrFrameNum() const
 {
-	return currFrameNum;
+	return currFrameNum - 1;
 }
 
 unsigned int MoviePlayer::getNumFrames() const
@@ -129,10 +150,10 @@ void MoviePlayer::loadTape()
             // 13 lines afterwards is the image
             std::stringstream sss;
             
-            std::string lin;
+            std::string line;
             for (int i = 0; i < FRAMESIZE; i++) {
-                std::getline(fileInput, lin);
-                sss << lin << "\n";
+                std::getline(fileInput, line);
+                sss << line << "\n";
             }
             std::string image;
             image = sss.str();
