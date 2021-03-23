@@ -112,10 +112,10 @@ void MoviePlayer::copyCurrFrame()
     mFilm.insert(pos, copy);
 }
 
-//TODO: QUESTION: is this wrong? 
+//TODO: QUESTION: is this wrong?
 unsigned MoviePlayer::getCurrFrameNum() const
 {
-	return currFrameNum - 1;
+	return currFrameNum;
 }
 
 unsigned int MoviePlayer::getNumFrames() const
