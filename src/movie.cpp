@@ -59,6 +59,10 @@ void MoviePlayer::goBack()
     // should not go lower than frame 1
     if (currFrameNum == 1) {
         std::cout << "Beginning of film. Cannot go back." << std::endl;
+        // same thing as goforward. how do i get it to stop.
+        
+        
+        
     }
     else {
         // move the tape backwards by 1
@@ -120,7 +124,7 @@ unsigned MoviePlayer::getCurrFrameNum() const
 
 unsigned int MoviePlayer::getNumFrames() const
 {
-	return (mFilm.size() - 1);
+	return mFilm.size();
     //return mFilm.size();
 }
 
@@ -168,6 +172,10 @@ void MoviePlayer::loadTape()
     }
     else {
         std::cout << "Error: File not found :(" << std::endl;
+        // same question as the go forward and back - is this not supposed to be here?
+        
+        
+        
     }
     
     // close the file
