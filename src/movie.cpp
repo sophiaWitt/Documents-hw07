@@ -122,10 +122,11 @@ unsigned MoviePlayer::getCurrFrameNum() const
 	return currFrameNum;
 }
 
+//TODO: QUESTION: why is it that when i do -1 it says the size is correct, but whne i don't do -1 then the size of input/starwar.ani is the same as in the example that nathan gives on hw7's write up (15475 vs the 15474 i get when i include the -1)
 unsigned int MoviePlayer::getNumFrames() const
 {
-	return mFilm.size();
-    //return mFilm.size();
+	//return mFilm.size();
+    return mFilm.size() - 1;
 }
 
 unsigned int MoviePlayer::getFrameSize() const
@@ -171,7 +172,8 @@ void MoviePlayer::loadTape()
         }
     }
     else {
-        std::cout << "Error: File not found :(" << std::endl;
+        throw std::invalid_argument("File not opening.");
+        //std::cout << "Error: File not found :(" << std::endl;
         // same question as the go forward and back - is this not supposed to be here?
         
         
