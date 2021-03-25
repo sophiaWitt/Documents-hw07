@@ -126,7 +126,10 @@ void MoviePlayer::loadTape()
             for (int i = 0; i < FRAMESIZE; i++) {
                 std::getline(fileInput, line);
                 // add each line and a new line to the stringstream
-                sss << line << " \n";
+                if (line[line.size() - 1] == '\\') {
+                    sss << line << " \n";
+                }
+                sss << line << "\n";
             }
             // convert the stringstream to a string
             std::string image;
