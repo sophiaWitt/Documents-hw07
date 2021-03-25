@@ -129,7 +129,9 @@ void MoviePlayer::loadTape()
                 if (line[line.size() - 1] == '\\') {
                     sss << line << " \n";
                 }
-                sss << line << "\n";
+                else {
+                    sss << line << "\n";
+                }
             }
             // convert the stringstream to a string
             std::string image;
