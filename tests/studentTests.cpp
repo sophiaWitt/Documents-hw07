@@ -20,7 +20,6 @@ extern bool CheckTextFilesSame(const std::string& fileNameA,
 TEST_CASE("Student list tests", "[student]")
 {
     
-    
 	SECTION("Default constructor, size, and destructor")
 	{
         MoviePlayer mp = MoviePlayer("input/scene1.ani");

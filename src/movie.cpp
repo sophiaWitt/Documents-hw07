@@ -15,15 +15,13 @@ MoviePlayer::MoviePlayer(std::string filmName)
 {
     // set the appropriate member variables
     mFilmName = filmName;
-    currFrameNum = 1;
-    pos = mFilm.begin();
-    
+
     // ensure the tape is empty
-    mFilm = {};
     mFilm.clear();
     
     // call loadTape to fill the tape
     loadTape();
+    rewind();
 }
 
 MoviePlayer::~MoviePlayer()
@@ -34,19 +32,7 @@ MoviePlayer::~MoviePlayer()
 void MoviePlayer::goFwrd()
 {
     // should not go past the end of the movie
-    if (currFrameNum == mFilm.size()) {
-        //rewind();
-        std::cout << "End of film. Cannot go forward." << std::endl;
-        //TODO: QUESTIONS FOR TA
-        // what should I do instead of this.
-        // what can I signal to end the film 
-        // i think the issue is that when it does go forward and it hits the end of the film it prints "End of film.Cannot go forward" over and over again until i stop the film.
-        // what should i do instead?
-        // maybe this is the case for all the github things? am i just handling errors wrong?
-        // should I throw an exception instead?
-        
-    }
-    else {
+    if (currFrameNum != mFilm.size()) {
         // move the tape forward by 1
         pos++;
         // increment currFrameNum
@@ -57,14 +43,7 @@ void MoviePlayer::goFwrd()
 void MoviePlayer::goBack()
 {
     // should not go lower than frame 1
-    if (currFrameNum == 1) {
-        std::cout << "Beginning of film. Cannot go back." << std::endl;
-        // same thing as goforward. how do i get it to stop.
-        
-        
-        
-    }
-    else {
+    if (currFrameNum != 1) {
         // move the tape backwards by 1
         pos--;
         // decrease currFrameNum
@@ -87,19 +66,9 @@ std::string MoviePlayer::getCurrFrame()
 void MoviePlayer::delCurrFrame()
 {
     // cannot delete frame if there are no frames
-    if (getNumFrames() != 1) {
+    if (pos != mFilm.end()) {
         // delete current frame
-        mFilm.erase(pos);
-        // move the tape forward by one
-        // this function already updates the currPositionNum, keeping track of how many frames have been viewed
-        // if the current frame is the end, it will rewind the film
-        if (currFrameNum == mFilm.size()) {
-            goBack();
-        }
-        else if (currFrameNum < mFilm.size()){
-            goFwrd();
-        }
-        
+        pos = mFilm.erase(pos);
     }
     else {
         std::cout << "Cannot delete the frame or else there will not be any left." << std::endl;
@@ -109,11 +78,7 @@ void MoviePlayer::delCurrFrame()
 void MoviePlayer::copyCurrFrame()
 {
 	// copy the current frame
-    std:: string copy = *pos;
-
-    // add the copy to mFilm just before the original frame
-    pos--;
-    mFilm.insert(pos, copy);
+    pos = mFilm.insert(pos, *pos);
 }
 
 //TODO: QUESTION: is this wrong?
@@ -131,6 +96,7 @@ unsigned int MoviePlayer::getNumFrames() const
 
 unsigned int MoviePlayer::getFrameSize() const
 {
+    // return framesize
 	return FRAMESIZE;
 }
 
@@ -155,12 +121,14 @@ void MoviePlayer::loadTape()
            
             // 13 lines afterwards is the image
             std::stringstream sss;
-            
+            // loop through the lines within framezine
             std::string line;
             for (int i = 0; i < FRAMESIZE; i++) {
                 std::getline(fileInput, line);
+                // add each line and a new line to the stringstream
                 sss << line << "\n";
             }
+            // convert the stringstream to a string
             std::string image;
             image = sss.str();
             
@@ -173,11 +141,6 @@ void MoviePlayer::loadTape()
     }
     else {
         throw std::invalid_argument("File not opening.");
-        //std::cout << "Error: File not found :(" << std::endl;
-        // same question as the go forward and back - is this not supposed to be here?
-        
-        
-        
     }
     
     // close the file
