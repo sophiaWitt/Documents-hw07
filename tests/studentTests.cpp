@@ -484,17 +484,57 @@ TEST_CASE("Student list tests", "[student]")
 
 	SECTION("List: erase with iterator at begin, middle, and one away from end")
 	{
-		
-        //TODO:write this one
-        // list: erase with iterator at begin
+        std::list<std::string> list;
+        std::list<std::string>::iterator pos;
+        list.push_back("***");
+        list.push_back("^^^");
+        list.push_back("---");
+        list.push_back("...");
+        list.push_back("!!!");
         
+        // erase with iterator at begin
+        pos = list.erase(list.begin());
+        REQUIRE(list.front() == "^^^");
+        bool includes;
+        for (std::string str : list) {
+            if (str == "***") {
+                includes = true;
+            }
+            else {
+                includes = false;
+            }
+        }
+        REQUIRE(includes == false);
         
         // at middle
+        pos++;
+        pos = list.erase(pos);
+        bool inc;
+        for (std::string s : list) {
+            if (s == "---") {
+                inc = true;
+            }
+            else {
+                inc = false;
+            }
+        }
+        REQUIRE(inc == false);
         
-        //at one away from the end
-        
-        
-		// Leave this at the end
+        // at one away from end
+        pos = list.end();
+        pos--;
+        pos = list.erase(pos);
+        bool is;
+        for (std::string stri : list) {
+            if (stri == "!!!") {
+                is = true;
+            }
+            else {
+                is = false;
+            }
+        }
+        REQUIRE(is == false);
+
 		REQUIRE(ITPMemLeaks::CheckIfMemoryFreed());
 	}
 }
