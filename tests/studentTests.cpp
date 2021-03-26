@@ -436,6 +436,7 @@ TEST_CASE("Student list tests", "[student]")
         std::list<std::string>::iterator pos = list.begin();
         REQUIRE(*pos == "---");
         pos = list.end();
+        pos--;
         REQUIRE(*pos == "!!!");
         
         // testing iterator dereference
@@ -484,6 +485,7 @@ TEST_CASE("Student list tests", "[student]")
 	SECTION("List: erase with iterator at begin, middle, and one away from end")
 	{
 		
+        //TODO: 
         // list: erase with iterator at begin
         
         
