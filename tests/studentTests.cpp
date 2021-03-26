@@ -485,7 +485,7 @@ TEST_CASE("Student list tests", "[student]")
 	SECTION("List: erase with iterator at begin, middle, and one away from end")
 	{
 		
-        //TODO: 
+        //TODO:write this one
         // list: erase with iterator at begin
         
         
@@ -506,15 +506,15 @@ TEST_CASE("Student movie", "[student]")
         // testing a bad constructor
         bool badConstructor;
         //TODO: QUESTION FOR TA: the try catch caused an error. why? what else should I do?
-//        try {
-//            // create a Movie Player using a string that does not reference a real file
-//            MoviePlayer mp = MoviePlayer("hi/notAnActualFile");
-//            badConstructor = false;
-//        }
-//        catch (const std::invalid_argument& e) {
-//            // if you caught the exception, then the contructor was bad
-//            badConstructor = true;
-//        }
+        try {
+            // create a Movie Player using a string that does not reference a real file
+            MoviePlayer mp = MoviePlayer("hi/notAnActualFile");
+            badConstructor = false;
+        }
+        catch (const std::invalid_argument& e) {
+            // if you caught the exception, then the contructor was bad
+            badConstructor = true;
+        }
         REQUIRE(badConstructor);
         
 		// Leave this at the end
