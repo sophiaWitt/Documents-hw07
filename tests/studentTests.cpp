@@ -13,9 +13,6 @@
 // Email: wittmeie@usc.edu
 // Platform: Mac
 
-// TODO: office hours for the todo's I have within the lists unit tests. exceptions, comparison, and constructor.
-// TODO: questions about the Movie unit tests.
-
 // Helper function declarations (don't change this)
 extern bool CheckTextFilesSame(const std::string& fileNameA,
 	const std::string& fileNameB);
@@ -42,7 +39,7 @@ TEST_CASE("Student list tests", "[student]")
         // testing push_front
         std::list<std::string> list;
         list.push_front("---");
-        // testing front and push_back
+        // testing push_back using front to check that the front of the list is what was pushed back
         REQUIRE(list.front() == "---");
         
         // testing back and front
@@ -576,24 +573,17 @@ TEST_CASE("Student movie", "[student]")
 		// checking frames for scene 2
         MoviePlayer mp = MoviePlayer("input/scene2.ani");
         
-        
+        // use the input stream to read the first image from scene 2
         std::ifstream fileInput("input/scene2.ani");
-        
-        // make sure the file exists
-        
-            // only read in lines until the end of the file
-            
+        // get the number that is before it
         std::string seperator;
         std::getline(fileInput, seperator);
-                
-               
-                // 13 lines afterwards is the image
+        
+        // get the image into a stringstream
         std::stringstream ss;
-                // loop through the lines within framezine
         std::string line;
         for (int i = 0; i < 13; i++) {
             std::getline(fileInput, line);
-                    // add each line and a new line to the stringstream
             if (line[line.size() - 1] == '\\') {
                 ss << line << " \n";
             }
@@ -601,29 +591,12 @@ TEST_CASE("Student movie", "[student]")
                 ss << line << "\n";
             }
         }
-
+        //close the file
         fileInput.close();
-//
-//        ss << "       /~\\                                   |       _______\n";
-//        ss << "      ( oo|                                  | \"\"   /       \\  oo*o\n";
-//        ss << "      _\\=/_                                  | :.  |         | o**o\n";
-//        ss << "     /     \\                       ___       |     |         | *oo*\n";
-//        ss << "    //|/.\\|\\\\                     / ()\\      | ##  |         | o**o\n";
-//        ss << "   ||  \\_/  ||                  _|_____|_    | ##   \\_______/\n";
-//        ss << "   || |\\ /| ||                 | | === | |   |______________________\n";
-//        ss << "   #  \\_ _/ #                  |_|  O  |_|  /\n";
-//        ss << "      | | |                     ||  O  ||  |------------------------\n";
-//        ss << "      | | |                     ||__*__||  | (*)\n";
-//        ss << "      []|[]                    |~ \\___/ ~| |\n";
-//        ss << "      | | |                    /=\\ /=\\ /=\\ |\n";
-//        ss << " ____/_]_[_\\___________________[_]_[_]_[_]_|________________________\n";
-//
-        
-
+        // the first image of the film from the movie player object must be the same as that from the file
         REQUIRE(ss.str() == mp.getCurrFrame());
         
 		// Leave this at the end
 		REQUIRE(ITPMemLeaks::CheckIfMemoryFreed());
 	}
 }
-
