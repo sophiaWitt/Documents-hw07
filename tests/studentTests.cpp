@@ -379,6 +379,7 @@ TEST_CASE("Student list tests", "[student]")
         std::list<std::string>::iterator pos = list.begin();
         REQUIRE(*pos == "---");
         pos = list.end();
+        pos--;
         REQUIRE(*pos == "!!!");
         
         // testing iterator dereference
@@ -409,6 +410,7 @@ TEST_CASE("Student list tests", "[student]")
         std::list<std::string>::iterator pos = list.begin();
         REQUIRE(*pos == "---");
         pos = list.end();
+        pos--;
         REQUIRE(*pos == "!!!");
         
         // testing iterator dereference
@@ -467,7 +469,7 @@ TEST_CASE("Student list tests", "[student]")
         pos++;
         pos++;
         *pos = "^^^";
-        REQUIRE(*pos == "***");
+        REQUIRE(*pos == "^^^");
         
         // at one away from end
         pos = list.end();
