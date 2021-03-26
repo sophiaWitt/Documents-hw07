@@ -13,7 +13,8 @@
 // Email: wittmeie@usc.edu
 // Platform: Mac
 
-//TODO: office hours for the 4 todo's I have within the lists unit tests. questions about the Movie unit tests.
+// TODO: office hours for the todo's I have within the lists unit tests. exceptions, comparison, and constructor.
+// TODO: questions about the Movie unit tests.
 
 // Helper function declarations (don't change this)
 extern bool CheckTextFilesSame(const std::string& fileNameA,
@@ -27,10 +28,7 @@ TEST_CASE("Student list tests", "[student]")
         // testing the constructor
         std::list<std::string> list;
         REQUIRE(list.size() == 0);
-        //TODO: HOW DO I CHECK THAT THE HEAD OF THE LIST IS A NULLPTR
-        //REQUIRE(list.front() == nullptr);
         
-        //TODO: QUESTION FOR TA: is this the right thing for destructor or should I do more
         // testing the destructor
         list.~list();
         REQUIRE(list.size() == 0);
@@ -312,12 +310,7 @@ TEST_CASE("Student list tests", "[student]")
             }
         }
         REQUIRE(includes == false);
-        
-        // TODO: ASK TA what to do for this. i don't know what exceptions
-        //testing exceptions
-        
-        
-        
+  
 		// Leave this at the end
 		REQUIRE(ITPMemLeaks::CheckIfMemoryFreed());
 	}
@@ -390,9 +383,10 @@ TEST_CASE("Student list tests", "[student]")
         *pos = "hhh";
         REQUIRE(*pos == "hhh");
         
-        // TODO: QUESTION FOR TA: what does this mean
         // testing iterator comparison
-        
+        std::list<std::string>::iterator it = list.begin();
+        pos = list.begin();
+        REQUIRE(it == pos);
         
 		// Leave this at the end
 		REQUIRE(ITPMemLeaks::CheckIfMemoryFreed());
@@ -400,7 +394,6 @@ TEST_CASE("Student list tests", "[student]")
 
 	SECTION("List: begin, end; Iterator: dereference, increment")
 	{
-		
         std::list<std::string> list;
         list.push_back("---");
         list.push_back("...");
@@ -545,7 +538,6 @@ TEST_CASE("Student movie", "[student]")
 	{
         // testing a bad constructor
         bool badConstructor;
-        //TODO: QUESTION FOR TA: the try catch caused an error. why? what else should I do?
         try {
             // create a Movie Player using a string that does not reference a real file
             MoviePlayer mp = MoviePlayer("hi/notAnActualFile");
@@ -563,8 +555,17 @@ TEST_CASE("Student movie", "[student]")
 
 	SECTION("Creating scene 2")
 	{
-		// TODO: QUESTION FOR TA: what does this mean?
-        
+        //creating a movie player object for scene 2
+        bool works;
+        try {
+            MoviePlayer mp = MoviePlayer("input/scene2.ani");
+            REQUIRE(mp.getFrameSize() == 13);
+            works = true;
+        }
+        catch (const std::invalid_argument& e) {
+            works = false;
+        }
+        REQUIRE(works);
         
 		// Leave this at the end
 		REQUIRE(ITPMemLeaks::CheckIfMemoryFreed());
@@ -572,18 +573,29 @@ TEST_CASE("Student movie", "[student]")
 
 	SECTION("Checking frames, scene 2")
 	{
-		
-        // checking frames
+		// checking frames for scene 2
+        MoviePlayer mp = MoviePlayer("input/scene2.ani");
         
+        std::stringstream ss;
+        ss << "        /~\\                                   |       _______";
+        ss << "\n       ( oo|                                  | ""   /       \\  oo*o";
+        ss << "\n       _\\=/_                                  | :.  |         | o**o";
+        ss << "\n      /     \\                       ___       |     |         | *oo*";
+        ss << "\n    //|/.\\|\\                     / ()\\      | ##  |         | o**o";
+        ss << "\n    ||  \\_/  ||                  _|_____|_    | ##   \\_______/";
+        ss << "\n    || |\\ /| ||                 | | === | |   |______________________";
+        ss << "\n    #  \\_ _/ #                  |_|  O  |_|  /";
+        ss << "\n       | | |                     ||  O  ||  |------------------------";
+        ss << "\n       | | |                     ||__*__||  | (*)";
+        ss << "\n       []|[]                    |~ \\___/ ~| |";
+        ss << "\n      | | |                    /=\\ /=\\ /=\\ |";
+        ss << "\n  ____/_]_[_\\___________________[_]_[_]_[_]_|________________________";
         
-        // testing scene 2
-        
-        
-        
+
+        REQUIRE(ss.str() == mp.getCurrFrame());
         
 		// Leave this at the end
 		REQUIRE(ITPMemLeaks::CheckIfMemoryFreed());
 	}
 }
-
 

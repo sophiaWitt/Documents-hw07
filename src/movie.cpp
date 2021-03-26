@@ -62,7 +62,7 @@ void MoviePlayer::rewind()
 
 std::string MoviePlayer::getCurrFrame()
 {
-    // return the pointer of the iterator
+    // return the dereferenced iterator pointer
 	return *pos;
 }
 
@@ -111,7 +111,7 @@ void MoviePlayer::loadTape()
     if (fileInput.is_open()) {
         // only read in lines until the end of the file
         while (!fileInput.eof()) {
-            // first line is the seperator
+            // first line is the seperator (the number of times each image should be shown)
             std::string seperator;
             std::getline(fileInput, seperator);
             
