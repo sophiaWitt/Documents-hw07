@@ -576,23 +576,48 @@ TEST_CASE("Student movie", "[student]")
 		// checking frames for scene 2
         MoviePlayer mp = MoviePlayer("input/scene2.ani");
         
+        
+        std::ifstream fileInput("input/scene2.ani");
+        
+        // make sure the file exists
+        
+            // only read in lines until the end of the file
+            
+        std::string seperator;
+        std::getline(fileInput, seperator);
+                
+               
+                // 13 lines afterwards is the image
         std::stringstream ss;
-        
-        
-        ss << "       /~\\                                   |       _______\n";
-        ss << "      ( oo|                                  | \"\"   /       \\  oo*o\n";
-        ss << "      _\\=/_                                  | :.  |         | o**o\n";
-        ss << "     /     \\                       ___       |     |         | *oo*\n";
-        ss << "    //|/.\\|\\\\                     / ()\\      | ##  |         | o**o\n";
-        ss << "   ||  \\_/  ||                  _|_____|_    | ##   \\_______/\n";
-        ss << "   || |\\ /| ||                 | | === | |   |______________________\n";
-        ss << "   #  \\_ _/ #                  |_|  O  |_|  /\n";
-        ss << "      | | |                     ||  O  ||  |------------------------\n";
-        ss << "      | | |                     ||__*__||  | (*)\n";
-        ss << "      []|[]                    |~ \\___/ ~| |\n";
-        ss << "      | | |                    /=\\ /=\\ /=\\ |\n";
-        ss << " ____/_]_[_\\___________________[_]_[_]_[_]_|________________________\n";
-         
+                // loop through the lines within framezine
+        std::string line;
+        for (int i = 0; i < 13; i++) {
+            std::getline(fileInput, line);
+                    // add each line and a new line to the stringstream
+            if (line[line.size() - 1] == '\\') {
+                ss << line << " \n";
+            }
+            else {
+                ss << line << "\n";
+            }
+        }
+
+        fileInput.close();
+//
+//        ss << "       /~\\                                   |       _______\n";
+//        ss << "      ( oo|                                  | \"\"   /       \\  oo*o\n";
+//        ss << "      _\\=/_                                  | :.  |         | o**o\n";
+//        ss << "     /     \\                       ___       |     |         | *oo*\n";
+//        ss << "    //|/.\\|\\\\                     / ()\\      | ##  |         | o**o\n";
+//        ss << "   ||  \\_/  ||                  _|_____|_    | ##   \\_______/\n";
+//        ss << "   || |\\ /| ||                 | | === | |   |______________________\n";
+//        ss << "   #  \\_ _/ #                  |_|  O  |_|  /\n";
+//        ss << "      | | |                     ||  O  ||  |------------------------\n";
+//        ss << "      | | |                     ||__*__||  | (*)\n";
+//        ss << "      []|[]                    |~ \\___/ ~| |\n";
+//        ss << "      | | |                    /=\\ /=\\ /=\\ |\n";
+//        ss << " ____/_]_[_\\___________________[_]_[_]_[_]_|________________________\n";
+//
         
 
         REQUIRE(ss.str() == mp.getCurrFrame());
