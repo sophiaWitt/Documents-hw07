@@ -13,19 +13,21 @@
 
 MoviePlayer::MoviePlayer(std::string filmName)
 {
-    // set the appropriate member variables
+    // set the member variable mFilm to the inputted filmName
     mFilmName = filmName;
 
     // ensure the tape is empty
     mFilm.clear();
     
-    // call loadTape to fill the tape
+    // call loadTape to fill the tape and rewind to the beginning of the film
     loadTape();
+    // calling rewind will set the member variables currFrameNum and pos
     rewind();
 }
 
 MoviePlayer::~MoviePlayer()
 {
+    // clear the film
     mFilm.clear();
 }
 
@@ -60,6 +62,7 @@ void MoviePlayer::rewind()
 
 std::string MoviePlayer::getCurrFrame()
 {
+    // return the pointer of the iterator
 	return *pos;
 }
 
@@ -81,22 +84,21 @@ void MoviePlayer::copyCurrFrame()
     pos = mFilm.insert(pos, *pos);
 }
 
-//TODO: QUESTION: is this wrong?
 unsigned MoviePlayer::getCurrFrameNum() const
 {
+    //return the current frame num member variable
 	return currFrameNum;
 }
 
-//TODO: QUESTION: why is it that when i do -1 it says the size is correct, but whne i don't do -1 then the size of input/starwar.ani is the same as in the example that nathan gives on hw7's write up (15475 vs the 15474 i get when i include the -1)
 unsigned int MoviePlayer::getNumFrames() const
 {
-	//return mFilm.size();
+    // return the size of the member variable mFilm minus 1
     return mFilm.size() - 1;
 }
 
 unsigned int MoviePlayer::getFrameSize() const
 {
-    // return framesize
+    // return the framesize member variable
 	return FRAMESIZE;
 }
 
